@@ -5,50 +5,47 @@ from random import randrange
 
 
 class EigthQueensPuzzle:
-    # Modelo de um estado
-    #
-    # State: ([line_queens],
-    #        (a, b, c),
-    #        (h)
-    #
-    # Onde:
-    # a: guarda o valor da coluna das rainhas
-    # b: guarda l-c das rainhas
-    # c: guarda l+c das rainhas
-    # h: valor da heuristica do estado
-    # A verificacao se da para cada rainha do tabuleiro, onde e testado
-    # se existe outra rainha ja visitada com os mesmos valores de a,b,c.
-    # caso exista, nao e um estado objetivo
+    """
+        Model of a state
 
-    def __init__(self, n_queens=8):
-        self.n_queens = n_queens
+        State: ([line_queens], (a, b, c), (h))
 
-    # Estado inicial:
-    #   Retorna o estado inicial a partir do size
+        a: Store queen column value
+        b: Store l-c of queens
+        c: Store l+c of queens
+        h: Value heuristic of state
+        The check is given to each queen of the board,
+        where it is tested if there is another queen already
+        visited with the same values of a, b, c. If it exists,
+        it is not an objective state
+    """
+
+    def __init__(self, queens=8):
+        self.queens = queens
+
     def initial(self):
-        return list(randrange(self.n_queens) for _ in range(self.n_queens))
+        """
+        Initial state
+        :return: Initial state from size
+        """
+        return list(randrange(self.queens) for _ in range(self.queens))
 
-    # Heuristica: h
-    #   Numero de pares de rainhas se atacando
     def heuristic_func(self, state):
         """
         Heurística (h)
+        Number of conflicting queen pairs
 
         :param state:
         :return:
         """
-        # define a,b,c como contadores
         a, b, c = Counter(), Counter(), Counter()
-        # contar quantas rainhas tem os valores (a,b,c)
-        # de forma que se obtem por exemplo quantas rainhas tem o valor de a=1
+        # Calculate how many queens are in equal positions
         for row, col in enumerate(state):
             a[col] += 1
             b[row - col] += 1
             c[row + col] += 1
-        h = 0  # inicia as colisoes com 0
-        # varre as estruturas de contagem (a,b,c) apenas incrementando o valor das colisoes
-        # caso para algum valor de (a/b/c)>1 ja que e feito cnt[key]-1
-        # divide para retirar contagens dobradas
+        h = 0
+        # scans the count structures (a, b, c) by just increasing the value of the collisions
         for count in [a, b, c]:
             for key in count:
                 h += count[key] * (count[key] - 1) / 2
@@ -56,29 +53,29 @@ class EigthQueensPuzzle:
 
     def near_states(self, state):
         """
-        Estados vizinhos
+        Neighboring states
         :param state:
-        :return: Todos os estados acessiveis a partir do atual movendo as pecas por coluna
+        :return: All states accessible from the current moving parts per column
         """
         near_states = []
-        # Para cada state[coluna] verfica se as colunas vizinhas estao vazias
-        for row in range(self.n_queens):
-            for col in range(self.n_queens):
-                # Se for diferente:
-                #   entao a col atual da iteracao esta disponivel para movimentar-se
-                #   visto que o state[] guarda o valor das colunas em que estao as rainhas
+        # For each state [column] check that neighboring columns are empty
+        for row in range(self.queens):
+            for col in range(self.queens):
+                # If different: then the current col of the iteration is available to move
+                # since the state [] stores the value of the columns in which the queens are
                 if col != state[row]:
                     aux = list(state)
-                    aux[row] = col  # Troca a coluna para a vazia
-                    near_states.append(list(aux))  # E inclui na lista de near_states
+                    aux[row] = col  # Column = column empty
+                    near_states.append(list(aux))
         return near_states
 
-    # Retorna uma escolha aleatoria dentre os estados proximos
     def random_near_state(self, state):
+        """
+        Random choice state between near states
+        :param state: near state list
+        :return: a random choice state between near states
+        """
         return choice(self.near_states(state))
-
-
-curr_time = lambda: int(round(time.time() * 1000))
 
 
 def hill_climbing(problem):
@@ -119,8 +116,15 @@ def print_board(result):
 
 
 def run_search(problem, i):
+    """
+    Start a search
+    :param problem:
+    :param i:
+    :return: solution
+    """
     n_iterations = i
     cnt = 0
+    curr_time = lambda: int(round(time.time() * 1000))
     start = curr_time()
     s = []
     for i in range(n_iterations):
