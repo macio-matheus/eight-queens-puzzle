@@ -28,10 +28,10 @@ In order to execute the application, it is necessary to perform the build of the
 
 ```sh
 cd eight-queens-puzzle
-docker-compose -f docker-compose.yml -f docker-compose-dev.yml build
+docker-compose build
 ```
 
-Run application in production environment
+Run application
 
 ```sh
 cd eight-queens-puzzle
