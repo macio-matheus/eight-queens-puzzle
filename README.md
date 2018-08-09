@@ -27,13 +27,13 @@ Hill climb algorithm is a mathematical optimization technique which belongs to t
 In order to execute the application, it is necessary to perform the build of the docker compose, done that, the application can already be executed with the compose up.
 
 ```sh
-cd typification-documents
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
+cd eight-queens-puzzle
+docker-compose -f docker-compose.yml -f docker-compose-dev.yml build
 ```
 
 Run application in production environment
 
 ```sh
-cd typification-documents
+cd eight-queens-puzzle
 docker-compose up
 ```
