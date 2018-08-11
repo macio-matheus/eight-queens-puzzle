@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  eight_queens_puzzle:
+    container_name: eight_queens
+    image: python:3.6.4
+    command: tail -f /dev/null
+    working_dir: /app
+    volumes:
+      - ./:/app

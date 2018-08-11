@@ -5,7 +5,7 @@ Challenge of the eight queens solved with local search algorithms
 ## Tech
 ```sh
 - Python 3.6
-- Search algorithms (Hill climb)
+- Search algorithms (Hill climbing)
 ```
 
 ## Hill climbing algorithm
@@ -24,9 +24,16 @@ cd eight-queens-puzzle
 docker-compose build
 ```
 
-Run application
+Run application environment
 
 ```sh
 cd eight-queens-puzzle
-docker-compose up
+docker-compose up -d
+```
+
+Enter on container and run algorithm
+
+```sh
+docker exec -it eight_queens bash
+python -m eight-queen-puzzle
 ```
