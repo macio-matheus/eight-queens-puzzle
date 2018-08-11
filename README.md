@@ -31,7 +31,7 @@ cd eight-queens-puzzle
 docker-compose up -d
 ```
 
-Enter on container and run algorithm
+Entering the container and run algorithm
 
 ```sh
 docker exec -it eight_queens bash
