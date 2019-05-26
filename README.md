@@ -14,7 +14,7 @@ Challenge of the eight queens solved with local search algorithm and basic genet
 
 Simplest evolutionary algorithm.
 
-## Hill climbing algorithm
+## Hill climbing algorithm (pseudcode) 
 
 Hill climbing algorithm is a mathematical optimization technique which belongs to the family of local search.
 
